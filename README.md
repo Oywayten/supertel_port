@@ -10,13 +10,15 @@ String[] indexes = {"1,3-5", "2", "3-4"};
 Port port = new Port(indexes);
 ````
 + E.g. The array of strings {"1,3-5", "2", "3-4"} is converted to the following array of numbers:
-{[1, 2, 3], [1, 2, 4], [3, 2, 3], [3, 2, 4], [4, 2, 3], [4, 2, 4], [5, 2, 3], [5, 2, 4]}
+  {[1, 2, 3], [1, 2, 4], [3, 2, 3], [3, 2, 4], [4, 2, 3], [4, 2, 4], [5, 2, 3], [5, 2, 4]}.
 
 ## Technology stack:
 
 ```text
-+ Java 17,
-+ Maven 4.
++ Java 8
++ Maven 4
++ Junit 5
++ AssertJ
 + Javadoc
 + Checkstyle
 ```
