@@ -20,6 +20,15 @@ class PortTest {
     }
 
     @Test
+    public void whenNumberMultipleDigits() {
+        String[] indexes = {"1,3-5", "2", "3-4", "233"};
+        Port port = new Port(indexes);
+        int[][] actual = port.stringArrToIntArr();
+        int[][] expected = {{1, 3, 4, 5}, {2}, {3, 4}, {233}};
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
     public void whenArraysIs135234ThenMultiplyArraysThenSuccessfully() {
         String[] indexes = {"1,3-5", "2", "3-4"};
         Port port = new Port(indexes);

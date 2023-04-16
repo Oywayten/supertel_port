@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 /**
  * Utility class with two public methods:
@@ -97,19 +96,34 @@ public final class Port {
     }
 
     private static int[] getInts(String[] result) {
-        List<Integer> integers = new ArrayList<>();
+        String[] strings;
+        int[] integers = new int[0];
+        int[] temp;
+        int[] array;
         for (String s : result) {
-            if (s.isEmpty()) {
+            strings = s.split("-");
+            if (s.length() == 0) {
                 throw new IllegalArgumentException("An empty array specified!");
-            } else if (s.length() == 1) {
-                integers.add(Integer.parseInt(s));
+            } else if (strings.length == 1) {
+                temp = new int[integers.length + 1];
+                System.arraycopy(integers, 0, temp, 0, integers.length);
+                temp[temp.length - 1] = Integer.parseInt(s);
+                integers = temp;
             } else {
-                String[] strings = s.split("-");
-                IntStream.rangeClosed(Integer.parseInt(strings[0]), Integer.parseInt(strings[1])).forEach(integers::add);
+                int startInclusive = Integer.parseInt(strings[0]);
+                int endInclusive = Integer.parseInt(strings[1]);
+                 array = new int[endInclusive - startInclusive + 1];
+                int i = 0;
+                for (int j = startInclusive; j < endInclusive + 1; j++) {
+                    array[i] = j;
+                    i++;
+                }
+                temp = new int[integers.length + array.length];
+                System.arraycopy(integers, 0, temp, 0, integers.length);
+                System.arraycopy(array, 0, temp, integers.length, array.length);
+                integers = temp;
             }
         }
-        int[] ints = new int[integers.size()];
-        Arrays.setAll(ints, integers::get);
-        return ints;
+        return integers;
     }
 }
